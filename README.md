@@ -2,7 +2,8 @@
 
 ## Team Members
 - **Mateusz Janowski**
-- **[Optional] Add Other Members**
+- **Zuzanna Rybok**
+- **Gonçalo Teixeira**
 
 ## Overview
 Project MINDD focuses on applying advanced machine learning techniques to predict hotel booking cancellations using a real-world dataset. The goal is to identify patterns and key factors influencing customer decisions, thereby enabling better decision-making for hotel management systems.
@@ -23,7 +24,7 @@ Project MINDD focuses on applying advanced machine learning techniques to predic
 - Predict whether a hotel reservation will be canceled
 - Explore and clean customer reservation data
 - Perform feature engineering and reduction
-- Evaluate multiple classifiers including ensemble models
+- Evaluate multiple classifiers, including ensemble models
 - Balance the dataset and handle missing values effectively
 
 ## Dataset

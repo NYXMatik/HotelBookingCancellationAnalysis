@@ -1,4 +1,4 @@
-# Project MINDD – Hotel Booking Cancellation Prediction
+# Project MINDD – Hotel Booking Cancellation Analysis
 
 ## Team Members
 - **Mateusz Janowski**

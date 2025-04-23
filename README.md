@@ -6,117 +6,92 @@
 - **Gonçalo Teixeira**
 
 ## Overview
-Project MINDD focuses on applying advanced machine learning techniques to predict hotel booking cancellations using a real-world dataset. The goal is to identify patterns and key factors influencing customer decisions, thereby enabling better decision-making for hotel management systems.
+This project leverages advanced machine learning techniques to predict whether a hotel booking will be canceled. The main notebook `Hotel_Booking_Cancelation_Analysis.ipynb` walks through the full pipeline—from data cleaning and exploratory analysis to modeling and evaluation.
+
+We focus on real-world hotel booking data, identifying trends and building interpretable models that can support operational decision-making.
 
 ## Table of Contents
-1. [Project Objectives](#project-objectives)
-2. [Dataset](#dataset)
-3. [Installation](#installation)
-4. [Usage](#usage)
-5. [Methods & Techniques](#methods--techniques)
-6. [Data Preprocessing](#data-preprocessing)
-7. [Model Training & Evaluation](#model-training--evaluation)
-8. [Results](#results)
-9. [Project Structure](#project-structure)
-10. [License](#license)
+- [Objectives](#objectives)
+- [Dataset](#dataset)
+- [Environment Setup](#environment-setup)
+- [Running the Project](#running-the-project)
+- [Methodology](#methodology)
+  - [Preprocessing](#preprocessing)
+  - [Feature Engineering](#feature-engineering)
+  - [Models](#models)
+  - [Evaluation Metrics](#evaluation-metrics)
+- [Key Results](#key-results)
+- [Repository Structure](#repository-structure)
+- [License](#license)
 
-## Project Objectives
-- Predict whether a hotel reservation will be canceled
-- Explore and clean customer reservation data
-- Perform feature engineering and reduction
-- Evaluate multiple classifiers, including ensemble models
-- Balance the dataset and handle missing values effectively
+## Objectives
+- Predict booking cancellations based on reservation metadata.
+- Handle missing and noisy data realistically.
+- Engineer domain-relevant features to improve predictions.
+- Compare a wide range of classifiers including boosting and ensemble methods.
 
 ## Dataset
-- Source: `hotel_booking.csv`
-- Rows: ~119,000
-- Features: 32
+- File: `hotel_booking.csv`
+- Observations: ~119,000
+- Columns: 32 attributes per booking
 - Target: `is_canceled` (binary classification)
 
-### Key Features:
-- Booking info: lead time, arrival dates, distribution channel, etc.
-- Customer profile: repeated guest, customer type, country
-- Room information: reserved vs assigned type
-- Financials: ADR, deposit type, special requests
+### Sample Features:
+- **Customer behavior**: lead time, special requests, repeated guest
+- **Booking logistics**: arrival date, reserved vs assigned room
+- **Channel & financials**: distribution type, deposit, ADR
 
-## Installation
-
-Install required dependencies:
+## Environment Setup
 
 ```bash
 pip install pandas numpy scikit-learn imbalanced-learn seaborn matplotlib xgboost lightgbm missingno
 ```
 
-## Usage
-
-To run the notebook:
+## Running the Project
 
 ```bash
-git clone [repository-url]
-cd [project-directory]
-jupyter notebook Project_MINDD.ipynb
+git clone https://github.com/[your-username]/[repo-name].git
+cd [repo-name]
+jupyter notebook Hotel_Booking_Cancelation_Analysis.ipynb
 ```
 
-## Methods & Techniques
+## Methodology
 
 ### Preprocessing
-- Imputation using `SimpleImputer`
-- Encoding categorical data (`LabelEncoder`)
-- Handling missing values:
-  - Dropped high-missing-value columns (`company`, `agent`)
-  - Merged child and baby columns into one
-- Feature scaling: `StandardScaler` and `MinMaxScaler`
+- Dropped columns: `company`, `agent` (too many missing values)
+- Combined columns: `babies` + `children`
+- Encoded categorical features using `LabelEncoder`
+- Imputed missing values and scaled numeric data (`StandardScaler`, `MinMaxScaler`)
 
 ### Feature Engineering
-- Combined features: `children + babies`
-- Dropped identifiers to reduce data leakage
+- Removed identifiers like name/email
+- Created meaningful aggregates (e.g., total_children)
 
-### Machine Learning Models
-- Logistic Regression
-- Random Forest
-- K-Nearest Neighbors
-- SVM (Support Vector Machine)
-- Naive Bayes
-- Ensemble Models:
-  - Gradient Boosting (GB)
-  - AdaBoost
-  - Bagging
-  - XGBoost
-  - LightGBM
+### Models
+- **Linear**: Logistic Regression
+- **Tree-based**: Decision Trees, Random Forest
+- **Boosted**: XGBoost, LightGBM, AdaBoost, Gradient Boosting
+- **Others**: KNN, Naive Bayes, SVM, Bagging
 
 ### Evaluation Metrics
-- Accuracy Score
+- Accuracy
 - Confusion Matrix
-- Classification Report (Precision, Recall, F1-score)
-- Cross-Validation
+- Classification Report (precision, recall, F1-score)
+- K-Fold Cross-Validation
+- GridSearchCV for tuning
 
-## Data Preprocessing
+## Key Results
+- Best performance: Gradient Boosting and XGBoost (after tuning)
+- Reduced features improved training time while maintaining accuracy
+- Confusion matrix and feature importances plotted and analyzed
 
-Steps taken:
-1. Dropped identifier/irrelevant columns
-2. Managed missing values (dropping/imputing)
-3. Normalized numeric features
-4. Encoded categorical variables
-5. Balanced dataset using `RandomUnderSampler` and `NearMiss`
-
-## Model Training & Evaluation
-
-- Used `train_test_split` with stratification
-- Hyperparameter tuning using `GridSearchCV`
-- Compared models across consistent folds using `KFold`
-
-## Results
-
-- Best performance achieved with `GradientBoostingClassifier` and `XGBoost` (subject to tuning)
-- Effective feature reduction improved speed without significant accuracy loss
-- Visualizations (confusion matrix, feature importance) are included in the notebook
-
-## Project Structure
+## Repository Structure
 
 ```
-├── Project_MINDD.ipynb       # Main notebook
-├── hotel_booking.csv         # Dataset
-├── README.md                 # Project documentation
+├── Hotel_Booking_Cancelation_Analysis.ipynb   # Full EDA and modeling
+├── hotel_booking.csv                          # Dataset
+├── README.md                                  # Documentation
+├── LICENSE.txt                                # MIT License
 ```
 
 ## License
